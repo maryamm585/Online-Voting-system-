@@ -17,4 +17,7 @@ public interface VoteRepository extends JpaRepository<Vote,Long> {
     @Modifying
     @Query("DELETE FROM Vote v WHERE v.voter.id = :voterId")
     void deleteVotesByVoterId(@Param("voterId") Long voterId);
+
+    boolean existsByVoterIdAndCandidateAssignedElectionId(Long voterId, Long electionId);
+
 }
