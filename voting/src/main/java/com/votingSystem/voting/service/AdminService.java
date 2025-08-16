@@ -72,7 +72,7 @@ public class AdminService {
         dto.setId(updated.getId());
         dto.setName(updated.getName());
         dto.setEmail(updated.getEmail());
-        dto.setRole(updated.getRole());
+        dto.setRole(updated.getRole().name());
         dto.setAssignedElectionId(election.getId());
         return dto;
     }

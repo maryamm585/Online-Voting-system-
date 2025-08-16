@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/voter")
+@RequestMapping("/api/v1/voter")
 @RequiredArgsConstructor
 public class VoterController {
     private final VoterService voterService;
