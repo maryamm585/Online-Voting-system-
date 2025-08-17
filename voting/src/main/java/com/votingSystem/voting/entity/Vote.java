@@ -25,4 +25,8 @@ public class Vote {
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
+
+    @ManyToOne
+    @JoinColumn(name = "election_id")
+    private Election election; // Add this field
 }
