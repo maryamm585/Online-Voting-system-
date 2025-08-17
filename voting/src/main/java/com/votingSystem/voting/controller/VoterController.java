@@ -23,9 +23,18 @@ public class VoterController {
         return ResponseEntity.ok(candidates);
     }
 
-    @PostMapping("/vote")
-    public ResponseEntity<Map<String, String>> castVote(@Valid @RequestBody VoteDTO voteDTO) {
+    @PostMapping("/elections/{electionId}/vote")
+    public ResponseEntity<Map<String, String>> castVote(
+            @PathVariable Long electionId,
+            @Valid @RequestBody VoteDTO voteDTO) {
+
         voterService.castvote(voteDTO);
         return ResponseEntity.ok(Map.of("message", "Vote cast successfully"));
+    }
+
+    @GetMapping("/elections/{electionId}/results")
+    public ResponseEntity<Map<String, Long>> getElectionResults(@PathVariable Long electionId) {
+        Map<String, Long> results = voterService.getResults(electionId);
+        return ResponseEntity.ok(results);
     }
 }
