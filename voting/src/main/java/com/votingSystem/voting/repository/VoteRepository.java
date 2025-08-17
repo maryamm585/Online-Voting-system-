@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VoteRepository extends JpaRepository<Vote,Long> {
+public interface VoteRepository extends JpaRepository<Vote, Long> {
+
     @Query("SELECT v FROM Vote v WHERE v.voter.id = :voterId")
     List<Vote> findVotesByVoterId(@Param("voterId") Long voterId);
 
@@ -18,6 +19,8 @@ public interface VoteRepository extends JpaRepository<Vote,Long> {
     @Query("DELETE FROM Vote v WHERE v.voter.id = :voterId")
     void deleteVotesByVoterId(@Param("voterId") Long voterId);
 
-    boolean existsByVoterIdAndCandidateAssignedElectionId(Long voterId, Long electionId);
+    boolean existsByVoterIdAndElectionId(Long voterId, Long electionId);
 
+    @Query("SELECT v.candidate.name, COUNT(v.id) FROM Vote v WHERE v.election.id = ?1 GROUP BY v.candidate.name ORDER BY COUNT(v.id) DESC")
+    List<Object[]> countVotesByCandidateNameAndElectionId(Long electionId);
 }
